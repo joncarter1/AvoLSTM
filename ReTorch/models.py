@@ -1,12 +1,12 @@
 import torch
-from layers import FC, Dropout, NNLayer
-from activations import swish, linear, tanh
+from ReTorch.layers import FC, Dropout, NNLayer
+from ReTorch.activations import swish, linear, tanh
 from torch import relu, sigmoid
 
 
 class NN:
     def __init__(self):
-        pass
+        self._parameters = None  # Stored parameters
 
     def __call__(self, *args, **kwargs):
         return self.forward(*args, **kwargs)
@@ -16,17 +16,24 @@ class NN:
 
     def parameters(self):
         """Find all attributes which are NN layers and add them to trainable parameters."""
-        trainable_parameters = []
+        if self._parameters is not None:
+            return self._parameters
+        self._parameters = []
         for attr in dir(self):
             attr_val = getattr(self, attr)
             if isinstance(attr_val, NNLayer):
-                trainable_parameters += attr_val.get_params()
-        return trainable_parameters
+                self._parameters += attr_val.get_params()
+        return self._parameters
+
+    def set_parameters(self, parameter_list):
+        for index, value in enumerate(parameter_list):
+            self._parameters[index] = value
 
 
 class FCNN(NN):
     """Fully connected neural network"""
     def __init__(self):
+        super().__init__()
         dropout = 0
         self.fc1 = FC(1, 50)
         self.fc2 = FC(50, 400)
@@ -48,6 +55,7 @@ class FCNN(NN):
 class LSTM(NN):
     """LSTM neural network"""
     def __init__(self, in_size, h_size, out_size, y_layer1=100):
+        super().__init__()
         self.w_i = FC(in_size+h_size, h_size)
         self.w_f = FC(in_size+h_size, h_size)
         self.w_o = FC(in_size+h_size, h_size)
