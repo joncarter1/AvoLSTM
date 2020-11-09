@@ -10,6 +10,7 @@ Final network architecture:
 - 2 layer output network ($h_t$ -> $y_t$) with 100 hidden neurons and swish/linear activations
 - Hyper-gradient Adam optimiser :  <a href="https://www.codecogs.com/eqnedit.php?latex=\alpha=10^{-3},&space;\beta_1=0.9,&space;\beta_2=0.99,&space;\alpha_{LR}=10^{-8}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\alpha=10^{-3},&space;\beta_1=0.9,&space;\beta_2=0.99,&space;\alpha_{LR}=10^{-8}" title="\alpha=10^{-3}, \beta_1=0.9, \beta_2=0.99, \alpha_{LR}=10^{-8}" /></a>
 
+Results can be re-produced by running the AvocadoLSTM notebook.
 
 Work done as part of the AIMS CDT course.
 
