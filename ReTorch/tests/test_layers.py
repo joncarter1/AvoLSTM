@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-from layers import Conv1D, MaxPool1D
+from ReTorch.layers import Conv1D, MaxPool1D
 import numpy as np
 
 
@@ -15,7 +15,6 @@ def test_conv1d():
 
 
 def test_maxpool1d():
-    kernel_size, padding, stride = torch.randint(1, 5, size=(3, 1))
     kernel_size = np.random.randint(3, 10)
     padding = np.random.randint(0, np.floor(kernel_size/2))
     stride = np.random.randint(1, 10)
